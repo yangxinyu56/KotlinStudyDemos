@@ -3,6 +3,7 @@ package com.yxy.kotlinstudydemos
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.KeyEvent
+import android.webkit.WebChromeClient
 import android.webkit.WebResourceRequest
 import android.webkit.WebView
 import android.webkit.WebViewClient
@@ -17,6 +18,8 @@ class ForecastDetailActivity : AppCompatActivity() {
         val mWebView = find<WebView>(R.id.wv_wxjp_detail)
         val bundle = intent.extras
         urlString = bundle.getString("WEBVIEW_URL_KEY")
+        mWebView.settings.javaScriptEnabled=true
+        mWebView.setWebChromeClient(WebChromeClient())
         mWebView.setWebViewClient(object : WebViewClient() {
             override fun shouldOverrideUrlLoading(view: WebView, request: WebResourceRequest): Boolean {
                 return shouldOverrideUrlLoading(view, request)

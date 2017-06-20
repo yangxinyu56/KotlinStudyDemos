@@ -15,15 +15,8 @@ import com.yxy.kotlinstudydemos.R
  * Created by YangXinyu on 2017/6/19.
  */
 
-class SimplerItemAdapter(dateItems: List<Forecast>, context: Activity) : RecyclerView.Adapter<SimplerItemAdapter.SimpleItemViewHolder>() {
+class SimplerItemAdapter(val dateItems: List<Forecast>,val context: Activity) : RecyclerView.Adapter<SimplerItemAdapter.SimpleItemViewHolder>() {
 
-    private val items: List<Forecast>?
-    private val mContext: Activity?
-
-    init {
-        this.items = dateItems
-        this.mContext = context
-    }
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): SimpleItemViewHolder {
         val itemView = LayoutInflater.from(viewGroup.context).inflate(R.layout.item_forecast, viewGroup, false)
@@ -31,15 +24,13 @@ class SimplerItemAdapter(dateItems: List<Forecast>, context: Activity) : Recycle
     }
 
     override fun onBindViewHolder(viewHolder: SimpleItemViewHolder, position: Int) {
-        val f :Forecast= items!![position]
+        val f :Forecast= dateItems[position]
         viewHolder.tvTitle.text = f.title
         viewHolder.tvFrom.text = f.source
-        Glide.with(mContext).load(f.firstImg).into(viewHolder.ivFirstImg)
+        Glide.with(context).load(f.firstImg).into(viewHolder.ivFirstImg)
     }
 
-    override fun getItemCount(): Int {
-        return if (this.items != null) this.items.size else 0
-    }
+    override fun getItemCount(): Int =dateItems.size
 
     class SimpleItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var tvTitle: TextView = itemView.findViewById(R.id.tv_jp_title) as TextView
