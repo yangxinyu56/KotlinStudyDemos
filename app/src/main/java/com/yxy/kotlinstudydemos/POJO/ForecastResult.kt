@@ -3,23 +3,7 @@ package com.yxy.kotlinstudydemos.POJO
 /**
  * Created by YangXinyu on 2017/6/18.
  */
-data class ForecastResult(val city: City, val list: List<Forecast>)
-
-data class City(val id: Long, val name: String, val coord: Coordinates,
-                val country: String, val population: Int)
-
-data class Coordinates(val lon: Float, val lat: Float)
-data class Forecast(val dt: Long, val temp: Temperature, val pressure: Float,
-                    val humidity: Int, val weather: List<Weather>
-                    ,
-                    val speed: Float, val deg: Int, val clouds:
-                    Int,
-                    val rain: Float)
-
-data class Temperature(val day: Float, val min: Float, val max:
-Float,
-                       val night: Float, val eve: Float, val morn
-                       : Float)
-
-data class Weather(val id: Long, val main: String, val description: String,
-                   val icon: String)
+data class ForecastResult(val reason: String, val result: Result,val error_code:Int)
+data class Result(val list: List<Forecast>, val totalPage: Int,val ps:Int,val pno:Int)
+data class Forecast(val id: String, val title: String, val source: String,
+                    val firstImg: String, val mark: String, val url: String)
