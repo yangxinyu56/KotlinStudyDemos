@@ -1,22 +1,32 @@
 package com.yxy.kotlinstudydemos.adapter
 
-import android.support.v7.widget.RecyclerView
-import android.view.ViewGroup
+import android.app.Activity
+import android.widget.ImageView
 import android.widget.TextView
+import com.bumptech.glide.Glide
+import com.chad.library.adapter.base.BaseQuickAdapter
+import com.chad.library.adapter.base.BaseViewHolder
+import com.yxy.kotlinstudydemos.POJO.Forecast
+import com.yxy.kotlinstudydemos.R
 
 /**
  * Created by YangXinyu on 2017/6/18.
  */
-class ForecastListAdapter(val items: List<String>) : RecyclerView.Adapter<ForecastListAdapter.ViewHolder>() {
-    override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
-        holder!!.textView.text = items[position]
+class ForecastListAdapter(items: List<Forecast>, val context: Activity, layoutId: Int) : BaseQuickAdapter<Forecast, BaseViewHolder>(layoutId, items) {
+    fun setLayout(layout_id: Int) {
+        if (layout_id != 0) {
+            mLayoutResId = layout_id
+        }
     }
 
-    override fun getItemCount(): Int =items.size
-
-    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ViewHolder {
-        return ViewHolder(TextView(parent!!.context))
+    override fun convert(helper: BaseViewHolder, item: Forecast) {
+        val title = helper.getView<TextView>(R.id.tv_jp_title)
+        val source = helper.getView<TextView>(R.id.tv_jp_source)
+        val firstImg = helper.getView<ImageView>(R.id.iv_jp_firstImg)
+        title.text = item.title
+        source.text = "from:" + item.source
+        Glide.with(context).load(item.firstImg).into(firstImg)
+        //helper.addOnClickListener(R.id.iv_jp_firstImg)
     }
 
-    class ViewHolder(val textView: TextView) : RecyclerView.ViewHolder(textView)
 }

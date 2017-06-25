@@ -7,18 +7,15 @@ import java.net.URL
 /**
  * Created by YangXinyu on 2017/6/18.
  */
-class ForecastRequest(val appKey: String) {
+class ForecastRequest(pno: Int, ps: Int) {
     companion object {
-        //private val APP_ID = "15646a06818f61f7b8d7823ca833e1ce"
+        private val appKey = "07dab151c4c70bc55bfc09205b0659a6"
         private val URLS = "http://v.juhe.cn/weixin/query?"
-        //private val Complete_URL="http://samples.openweathermap.org/data/2.5/weather?q=London,uk&appid=b1b15e88fa79722541"
-        private val COMPLETE_URL = "$URLS+key="
     }
 
-    fun execute(): ForecastResult {
-        val forecastJsonStr = URL(COMPLETE_URL + appKey).readText()
-        return Gson().fromJson(forecastJsonStr, ForecastResult::
-        class.java)
-    }
+    val COMPLETE_URL = "$URLS+key=$appKey&pno=$pno&ps=$ps"
+
+    fun execute(): ForecastResult = Gson().fromJson(URL(COMPLETE_URL).readText(), ForecastResult::class.java)
+
 }
 
