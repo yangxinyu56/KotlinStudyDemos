@@ -1,35 +1,35 @@
 package com.yxy.kotlinstudydemos
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.KeyEvent
-import android.webkit.WebResourceRequest
-import android.webkit.WebView
+import android.webkit.WebChromeClient
 import android.webkit.WebViewClient
-import org.jetbrains.anko.find
+import kotlinx.android.synthetic.main.activity_forecast_detail.*
 
 class ForecastDetailActivity : AppCompatActivity() {
 
-    var urlString: String = ""
+    @SuppressLint("SetJavaScriptEnabled")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_forecast_detail)
-        val mWebView = find<WebView>(R.id.wv_wxjp_detail)
-        val bundle = intent.extras
-        urlString = bundle.getString("WEBVIEW_URL_KEY")
-        mWebView.setWebViewClient(object : WebViewClient() {
-            override fun shouldOverrideUrlLoading(view: WebView, request: WebResourceRequest): Boolean {
-                return shouldOverrideUrlLoading(view, request)
+
+        wv_wxjp_detail.settings.javaScriptEnabled = true
+        with(wv_wxjp_detail) {
+            setWebChromeClient(WebChromeClient())
+            setWebViewClient(WebViewClient())
+            setOnKeyListener { _, keyCode, _ ->
+                if (keyCode == KeyEvent.KEYCODE_BACK && wv_wxjp_detail.canGoBack()) {
+                    // 返回键退回
+                    wv_wxjp_detail.goBack()
+                    true
+                } else
+                    false
             }
-        })
-        mWebView.setOnKeyListener { _, keyCode, _ ->
-            if (keyCode == KeyEvent.KEYCODE_BACK && mWebView.canGoBack()) {
-                // 返回键退回
-                mWebView.goBack()
-                true
-            } else
-                false
         }
-        mWebView.loadUrl(urlString)
+        intent.extras["WEBVIEW_URL_KEY"]?.let {
+            wv_wxjp_detail.loadUrl(it.toString())
+        }
     }
 }

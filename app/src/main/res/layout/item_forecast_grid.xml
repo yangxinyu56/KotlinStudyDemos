@@ -2,18 +2,26 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
+              android:gravity="center"
               android:orientation="vertical">
+
+
+    <ImageView
+        android:id="@+id/iv_jp_firstImg"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:scaleType="fitXY"/>
 
     <TextView
         android:id="@+id/tv_jp_title"
         android:layout_width="match_parent"
+        android:textStyle="bold"
+        android:gravity="center"
         android:layout_height="wrap_content"/>
-    <ImageView
-        android:id="@+id/iv_jp_firstImg"
-        android:layout_width="100dp"
-        android:layout_height="100dp"/>
+
     <TextView
         android:id="@+id/tv_jp_source"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:visibility="gone"/>
 </LinearLayout>

@@ -5,8 +5,8 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.widget.Toast
-import com.yxy.kotlinstudydemos.adapter.ForecastListAdapter
 import com.yxy.kotlinstudydemos.adapter.ItemClickSupport
+import com.yxy.kotlinstudydemos.adapter.SimplerItemAdapter
 import org.jetbrains.anko.find
 
 class MainActivity : AppCompatActivity() {
@@ -35,7 +35,7 @@ class MainActivity : AppCompatActivity() {
 //        val forecastList = findViewById(R.id.rlv_forecast_list) as RecyclerView
         val forecastList = find<RecyclerView>(R.id.rlv_forecast_list)
         forecastList.layoutManager = LinearLayoutManager(this)
-        forecastList.adapter = ForecastListAdapter(items)
+        forecastList.adapter = SimplerItemAdapter(items)
         ItemClickSupport.addTo(forecastList).setOnItemClickListener { _, position, _ -> niceToast(items[position]) }
     }
 
