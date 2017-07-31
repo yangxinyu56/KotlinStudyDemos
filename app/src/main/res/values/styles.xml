@@ -9,4 +9,5 @@
         <item name="android:listDivider">@drawable/divider</item>
     </style>
 
+    <style name="Toolbar" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 </resources>

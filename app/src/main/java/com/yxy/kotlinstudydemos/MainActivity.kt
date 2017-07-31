@@ -1,46 +1,60 @@
 package com.yxy.kotlinstudydemos
 
 import android.os.Bundle
+import android.support.design.widget.NavigationView
+import android.support.v4.view.GravityCompat
 import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
+import android.view.MenuItem
 import android.widget.Toast
-import com.yxy.kotlinstudydemos.adapter.ItemClickSupport
-import com.yxy.kotlinstudydemos.adapter.SimplerItemAdapter
-import org.jetbrains.anko.find
+import com.yxy.kotlinstudydemos.fragments.MainFragment
+import kotlinx.android.synthetic.main.activity_main.*
+
 
 class MainActivity : AppCompatActivity() {
-
-
-    val i = 12 // An Int
-    val iHex = 0x0f // 一个十六进制的Int类型
-    val l = 3L // A Long
-    val d = 3.5 // A Double
-    val f = 3.5F // A Float
-
-    private val items = listOf(
-            "Mon 6/23 - Sunny - 31/17",
-            "Tue 6/24 - Foggy - 21/8",
-            "Wed 6/25 - Cloudy - 22/17",
-            "Thurs 6/26 - Rainy - 18/11",
-            "Fri 6/27 - Foggy - 21/10",
-            "Sat 6/28 - TRAPPED IN WEATHERSTATION - 23/18",
-            "Sun 6/29 - Sunny - 20/7"
-    )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        //view.setOnClickListener { toast("Hello world!") }
-//        val forecastList = findViewById(R.id.rlv_forecast_list) as RecyclerView
-        val forecastList = find<RecyclerView>(R.id.rlv_forecast_list)
-        forecastList.layoutManager = LinearLayoutManager(this)
-        forecastList.adapter = SimplerItemAdapter(items)
-        ItemClickSupport.addTo(forecastList).setOnItemClickListener { _, position, _ -> niceToast(items[position]) }
+        setupToolbar()
+        setupNavigationView(nav_view)
+        createViewFragment()
     }
 
-    fun toast(message: String, length: Int = Toast.LENGTH_SHORT) {
-        Toast.makeText(this, message, length).show()
+    private fun createViewFragment() {
+        val transaction = supportFragmentManager.beginTransaction()
+        transaction.add(R.id.fl_home_container, MainFragment())
+        transaction.commit()
+    }
+
+    private fun setupToolbar() {
+        setSupportActionBar(toolbar)
+        val ab = supportActionBar
+        ab!!.setHomeAsUpIndicator(R.drawable.ic_menu)
+        ab.setDisplayHomeAsUpEnabled(true)
+    }
+
+    private fun setupNavigationView(nav_view: NavigationView) {
+        nav_view.setNavigationItemSelectedListener {
+            when (it.itemId) {
+                R.id.list_navigation_menu_item -> {
+                    niceToast("test_list_click")
+                }
+            }
+            it.isChecked = true
+            drawer_layout.closeDrawers()
+            true
+        }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            android.R.id.home -> {
+                // Open the navigation drawer when the home icon is selected from the toolbar.
+                drawer_layout.openDrawer(GravityCompat.START)
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     fun niceToast(message: String,
