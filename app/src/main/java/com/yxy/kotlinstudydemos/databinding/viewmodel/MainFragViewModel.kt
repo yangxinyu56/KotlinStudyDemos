@@ -1,10 +1,11 @@
 package com.yxy.kotlinstudydemos.databinding.viewmodel
 
 import android.databinding.ObservableField
+import com.yxy.kotlinstudydemos.fragments.MainFragment
 
 /**
  * Created by YangXinyu on 2017/7/31.
  */
 class MainFragViewModel : ViewModel() {
-   val title: ObservableField<String> = ObservableField("test_fragment")
+    val vpAdapter: ObservableField<MainFragment.MyViewPagerAdapter> = ObservableField()
 }

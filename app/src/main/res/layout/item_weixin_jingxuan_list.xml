@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <import type="com.yxy.kotlinstudydemos.R"/>
+        <variable
+            name="itemVM"
+            type="com.yxy.kotlinstudydemos.databinding.viewmodel.ItemWXJXViewModel"/>
+    </data>
+<LinearLayout
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="horizontal">
+
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:scaleType="fitXY"
+        app:url="@{itemVM.firstImg}"
+        app:placeHolder="@{R.mipmap.ic_launcher}"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:textStyle="bold"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{itemVM.title}"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:text="@{itemVM.source}"/>
+    </RelativeLayout>
+</LinearLayout>
+</layout>

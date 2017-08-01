@@ -1,10 +1,14 @@
 package com.yxy.kotlinstudydemos.fragments
 
+import android.support.v4.app.Fragment
+import android.support.v4.app.FragmentManager
+import android.support.v4.app.FragmentPagerAdapter
 import com.yxy.kotlinstudydemos.BR
 import com.yxy.kotlinstudydemos.R
 import com.yxy.kotlinstudydemos.databinding.BindingFragment
 import com.yxy.kotlinstudydemos.databinding.FragmentMainBinding
 import com.yxy.kotlinstudydemos.databinding.viewmodel.MainFragViewModel
+import kotlinx.android.synthetic.main.fragment_main.*
 
 /**
  * Created by YangXinyu on 2017/7/31.
@@ -17,6 +21,24 @@ class MainFragment : BindingFragment<MainFragViewModel, FragmentMainBinding>() {
     override fun setupViewModelId(): Int = BR.viewModel
 
     override fun initView(binding: FragmentMainBinding) {
+        val stringArray = resources.getStringArray(R.array.home_catalog_name)
+        viewModel.vpAdapter.set(MyViewPagerAdapter(childFragmentManager, initFragments(), stringArray))
+        tl_main_category_tabs.setupWithViewPager(vp_main_category)
+    }
 
+    private fun initFragments(): List<Fragment> {
+        val tab1 = Category01Fragment()
+        val tab2 = Category02Fragment()
+        val tab3 = Category03Fragment()
+        return listOf<Fragment>(tab1, tab2, tab3)
+    }
+
+    inner class MyViewPagerAdapter(fm: FragmentManager, val mFragments: List<Fragment>, val titles: Array<String>) : FragmentPagerAdapter(fm) {
+
+        override fun getItem(position: Int): Fragment = mFragments[position]
+
+        override fun getCount(): Int = mFragments.size
+
+        override fun getPageTitle(position: Int): CharSequence = titles[position]
     }
 }
