@@ -18,8 +18,8 @@ import kotlinx.android.synthetic.main.fragment_category01.*
  *   微信精选
  */
 class Category01Fragment : BindingFragment<Category01ViewModel, FragmentCategory01Binding>() {
-    var pageNo: Int = 1
-    val pageSize: Int = 20
+    var pageNo = 1
+    val pageSize = 20
     override fun setupLayoutId(): Int = R.layout.fragment_category01
 
     override fun setupViewModel(): Category01ViewModel = Category01ViewModel()

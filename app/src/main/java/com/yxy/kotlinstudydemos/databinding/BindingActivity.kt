@@ -1,6 +1,5 @@
 package com.yxy.kotlinstudydemos.databinding
 
-import android.databinding.DataBindingUtil
 import android.databinding.ViewDataBinding
 import android.os.Bundle
 import android.support.annotation.Nullable
@@ -13,36 +12,13 @@ import com.yxy.kotlinstudydemos.databinding.viewmodel.ViewModel
  * 基于DataBinding的Activity抽象基类
  */
 
-abstract class BindingActivity<VM : ViewModel, B : ViewDataBinding> : AppCompatActivity() {
-
-    protected lateinit var binding: B
-    protected lateinit var viewModel: VM
+abstract class BindingActivity<out VM : ViewModel, B : ViewDataBinding>(val mViewModel: VM, val mVariableId: Int, val mBinding: B) : AppCompatActivity() {
 
     override fun onCreate(@Nullable savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this, setupLayoutId())
-        viewModel = setupViewModel()
-        binding.setVariable(setupViewModelId(), viewModel)
-        initView(binding)
+        mBinding.setVariable(mVariableId, mViewModel)
+        initView(mBinding)
     }
-
-    /**
-     * 设置xml布局文件
-     * @return R.layout.activity_xxx
-     */
-    abstract fun setupLayoutId(): Int
-
-    /**
-     * 设置ViewModel,即xml布局文件中data节点里<'variable type="xxx.xxx.ViewModel">
-     * @return Activity对应的ViewModel
-     */
-    abstract fun setupViewModel(): VM
-
-    /**
-     * 设置ViewModel的Id,即xml布局文件中data节点里<'variable name="xxx">
-     * @return BR.xxx
-     */
-    abstract fun setupViewModelId(): Int
 
     /**
      * 初始化UI

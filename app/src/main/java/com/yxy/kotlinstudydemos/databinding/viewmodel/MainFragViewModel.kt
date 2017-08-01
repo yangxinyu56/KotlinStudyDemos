@@ -7,5 +7,5 @@ import com.yxy.kotlinstudydemos.fragments.MainFragment
  * Created by YangXinyu on 2017/7/31.
  */
 class MainFragViewModel : ViewModel() {
-    val vpAdapter: ObservableField<MainFragment.MyViewPagerAdapter> = ObservableField()
+    val vpAdapter = ObservableField<MainFragment.MyViewPagerAdapter>()
 }
