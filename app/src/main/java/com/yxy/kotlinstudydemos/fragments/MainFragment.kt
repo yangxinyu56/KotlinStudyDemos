@@ -14,15 +14,15 @@ import kotlinx.android.synthetic.main.fragment_main.*
  * Created by YangXinyu on 2017/7/31.
  */
 class MainFragment : BindingFragment<MainFragViewModel, FragmentMainBinding>() {
-    override fun setupLayoutId(): Int = R.layout.fragment_main
+    override fun setupLayoutId() = R.layout.fragment_main
 
-    override fun setupViewModel(): MainFragViewModel = MainFragViewModel()
+    override fun setupViewModel() = MainFragViewModel()
 
-    override fun setupViewModelId(): Int = BR.viewModel
+    override fun setupViewModelId() = BR.viewModel
 
     override fun initView(binding: FragmentMainBinding) {
         val stringArray = resources.getStringArray(R.array.home_catalog_name)
-        viewModel.vpAdapter.set(MyViewPagerAdapter(childFragmentManager, initFragments(), stringArray))
+        mViewModel.vpAdapter.set(MyViewPagerAdapter(childFragmentManager, initFragments(), stringArray))
         tl_main_category_tabs.setupWithViewPager(vp_main_category)
     }
 
@@ -35,10 +35,10 @@ class MainFragment : BindingFragment<MainFragViewModel, FragmentMainBinding>() {
 
     inner class MyViewPagerAdapter(fm: FragmentManager, val mFragments: List<Fragment>, val titles: Array<String>) : FragmentPagerAdapter(fm) {
 
-        override fun getItem(position: Int): Fragment = mFragments[position]
+        override fun getItem(position: Int) = mFragments[position]
 
-        override fun getCount(): Int = mFragments.size
+        override fun getCount() = mFragments.size
 
-        override fun getPageTitle(position: Int): CharSequence = titles[position]
+        override fun getPageTitle(position: Int) = titles[position]
     }
 }

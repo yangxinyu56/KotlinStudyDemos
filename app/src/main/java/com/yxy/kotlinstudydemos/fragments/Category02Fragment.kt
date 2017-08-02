@@ -11,11 +11,11 @@ import com.yxy.kotlinstudydemos.databinding.viewmodel.Category02ViewModel
  *   Tab2
  */
 class Category02Fragment : BindingFragment<Category02ViewModel, FragmentCategory02Binding>() {
-    override fun setupLayoutId(): Int = R.layout.fragment_category02
+    override fun setupLayoutId() = R.layout.fragment_category02
 
-    override fun setupViewModel(): Category02ViewModel = Category02ViewModel()
+    override fun setupViewModel() = Category02ViewModel()
 
-    override fun setupViewModelId(): Int = BR.viewModel
+    override fun setupViewModelId() = BR.viewModel
 
     override fun initView(binding: FragmentCategory02Binding) {
 

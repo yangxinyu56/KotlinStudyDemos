@@ -7,7 +7,7 @@ import com.yxy.kotlinstudydemos.databinding.viewmodel.ItemWXJXViewModel
  * Created by YangXinyu on 2017/8/1.
  */
 class WeixingJingxuanMapper {
-    fun transform(forecasts: List<Forecast>?): List<ItemWXJXViewModel> {
-        return forecasts!!.map { ItemWXJXViewModel(it.id, it.title, it.source, it.firstImg, it.mark, it.url) }
+    fun transform(forecasts: List<Forecast>) = forecasts.map {
+        ItemWXJXViewModel(it.id, it.title, "from:${it.source}", it.firstImg, it.mark, it.url)
     }
 }
