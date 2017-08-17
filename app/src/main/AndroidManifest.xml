@@ -21,8 +21,6 @@
         </activity>
         <activity android:name=".CodeJavaActivity">
         </activity>
-        <activity android:name=".ForecastsActivity">
-        </activity>
         <activity android:name=".ForecastDetailActivity">
         </activity>
         <activity android:name=".WebActivity">
