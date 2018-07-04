@@ -24,7 +24,7 @@ abstract class BindingFragment<out VM : ViewModel, B : ViewDataBinding> : Fragme
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        mBinding = DataBindingUtil.bind(view)
+        mBinding = DataBindingUtil.bind(view)!!
         mBinding.setVariable(setupViewModelId(), mViewModel)
         initView(mBinding)
     }
